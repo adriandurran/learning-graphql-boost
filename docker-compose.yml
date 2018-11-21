@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    networks:
+      - graphy
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules/
+    ports:
+      - 4444:4444
+    command: ['nodemon', 'index.js']
+
+networks:
+  graphy:
