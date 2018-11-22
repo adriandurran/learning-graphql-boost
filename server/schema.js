@@ -1,5 +1,4 @@
 exports.typeDefs = `
-
     type Recipe {
         name: String!
         category: String!

@@ -37,22 +37,9 @@ mongoose
   .catch((error) => console.error('Unable to connect to database', error));
 
 const app = express();
-apollo.applyMiddleware({ app });
-// graphiql end point
-// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-// //  connect schemas with graphql
-// app.use(
-//   '/graphql',
-//   graphqlExpress({
-//     schema,
-//     context: {
-//       Recipe,
-//       User
-//     }
-//   })
-// );
-
 app.use(morgan('dev'));
+
+apollo.applyMiddleware({ app });
 
 const PORT = process.env.PORT || 4444;
 
