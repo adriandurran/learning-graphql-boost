@@ -1,11 +1,27 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 require('dotenv').config({ path: 'variables.env' });
 
 const Recipe = require('./models/Recipe');
 const User = require('./models/User');
+
+const { ApolloServer } = require('apollo-server-express');
+const { makeExecutableSchema } = require('apollo-server');
+
+const { typeDefs } = require('./schema');
+const { resolvers } = require('./resolvers');
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+});
+
+const apollo = new ApolloServer({
+  schema
+});
 
 mongoose
   .connect(
@@ -21,11 +37,27 @@ mongoose
   .catch((error) => console.error('Unable to connect to database', error));
 
 const app = express();
+apollo.applyMiddleware({ app });
+// graphiql end point
+// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+// //  connect schemas with graphql
+// app.use(
+//   '/graphql',
+//   graphqlExpress({
+//     schema,
+//     context: {
+//       Recipe,
+//       User
+//     }
+//   })
+// );
 
 app.use(morgan('dev'));
 
 const PORT = process.env.PORT || 4444;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on PORT ${PORT}`);
+  console.log(
+    `Server listening on PORT ${PORT}, GraphQL ${apollo.graphqlPath}`
+  );
 });
