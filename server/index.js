@@ -1,21 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 
 require('dotenv').config({ path: 'variables.env' });
 
 const Recipe = require('./models/Recipe');
 const User = require('./models/User');
 
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, makeExecutableSchema } = require('apollo-server-express');
 
 const { typeDefs } = require('./schema');
 const { resolvers } = require('./resolvers');
 
-const apollo = new ApolloServer({
+const schema = new makeExecutableSchema({
   typeDefs,
   resolvers
+});
+
+const apollo = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ Recipe, User })
 });
 
 mongoose

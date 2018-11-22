@@ -20,6 +20,16 @@ exports.typeDefs = gql`
   }
 
   type Query {
-    recipes: [Recipe]
+    getAllRecipes: [Recipe]
+  }
+
+  type Mutation {
+    addRecipe(
+      name: String!
+      category: String!
+      description: String!
+      instructions: String!
+      username: String
+    ): Recipe
   }
 `;
