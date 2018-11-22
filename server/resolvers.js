@@ -1,1 +1,5 @@
-exports.resolvers = {};
+exports.resolvers = {
+  Query: {
+    recipes: () => recipes
+  }
+};

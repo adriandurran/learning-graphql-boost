@@ -18,4 +18,8 @@ exports.typeDefs = gql`
     joinDate: String
     favourites: [Recipe]
   }
+
+  type Query {
+    recipes: [Recipe]
+  }
 `;

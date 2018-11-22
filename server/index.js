@@ -8,7 +8,7 @@ require('dotenv').config({ path: 'variables.env' });
 const Recipe = require('./models/Recipe');
 const User = require('./models/User');
 
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-express');
 
 const { typeDefs } = require('./schema');
 const { resolvers } = require('./resolvers');
