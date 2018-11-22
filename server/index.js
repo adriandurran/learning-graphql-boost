@@ -8,19 +8,14 @@ require('dotenv').config({ path: 'variables.env' });
 const Recipe = require('./models/Recipe');
 const User = require('./models/User');
 
-const { ApolloServer } = require('apollo-server-express');
-const { makeExecutableSchema } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
 
 const { typeDefs } = require('./schema');
 const { resolvers } = require('./resolvers');
 
-const schema = makeExecutableSchema({
+const apollo = new ApolloServer({
   typeDefs,
   resolvers
-});
-
-const apollo = new ApolloServer({
-  schema
 });
 
 mongoose

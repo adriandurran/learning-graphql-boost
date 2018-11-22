@@ -1,3 +1,1 @@
-exports.resolvers = {
-  RootQuery: {}
-};
+exports.resolvers = {};
