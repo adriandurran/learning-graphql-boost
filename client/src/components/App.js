@@ -17,7 +17,7 @@ const App = () => (
         if (error) {
           return <div>Error</div>;
         }
-        console.log(data);
+        // console.log(data);
         return <p>Recipes</p>;
       }}
     </Query>
