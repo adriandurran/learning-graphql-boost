@@ -44,7 +44,7 @@ class Signup extends Component {
     const { username, email, password, passwordConfirmation } = this.state;
     return (
       <div className="App">
-        <h2 className="App">Signup</h2>
+        <h2 className="App">Sign Up</h2>
         <Mutation
           mutation={SIGNUP_USER}
           variables={{ username, email, password }}
