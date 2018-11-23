@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config({ path: 'variables.env' });
 
@@ -20,7 +21,7 @@ ObjectId.prototype.valueOf = function() {
 const apollo = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ Recipe, User })
+  context: ({ req, res }) => ({ Recipe, User, currentUser: req.currentUser })
 });
 
 mongoose
@@ -38,7 +39,18 @@ mongoose
 
 const app = express();
 app.use(morgan('dev'));
-
+app.use(async (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (token !== 'null') {
+    try {
+      const currentUser = await jwt.verify(token, process.env.SECRET);
+      req.currentUser = currentUser;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  next();
+});
 apollo.applyMiddleware({ app });
 
 const PORT = process.env.PORT || 4444;
