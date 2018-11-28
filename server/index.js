@@ -41,8 +41,9 @@ const app = express();
 app.use(morgan('dev'));
 app.use(async (req, res, next) => {
   const token = req.headers['authorization'];
-  if (token !== 'null') {
-    console.log(token);
+  console.log(req.headers['authorization']);
+  if (token !== null || token !== undefined) {
+    // console.log(token);
     try {
       const currentUser = await jwt.verify(token, process.env.SECRET);
       req.currentUser = currentUser;
