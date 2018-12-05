@@ -45,10 +45,10 @@ const NavbarAuth = ({ session }) => (
         <NavLink to="/search">Search</NavLink>
       </li>
       <li>
-        <NavLink to="#">Add Recipe</NavLink>
+        <NavLink to="/recipe/add">Add Recipe</NavLink>
       </li>
       <li>
-        <NavLink to="#">Profile</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
       </li>
       <li>
         <Signout />
