@@ -17,6 +17,7 @@ import Navbar from './components/Navbar';
 import Search from './components/recipe/Search';
 
 import AddRecipe from './components/recipe/AddRecipe';
+import RecipePage from './components/recipe/RecipePage';
 import Profile from './components/profile/Profile';
 
 import * as serviceWorker from './serviceWorker';
@@ -55,6 +56,7 @@ const Root = ({ refetch, session }) => (
         <Route path="/search" exact component={Search} />
         <Route path="/profile" component={Profile} />
         <Route path="/recipe/add" component={AddRecipe} />
+        <Route path="/recipes/:_id" component={RecipePage} />
         <Redirect to="/" />
       </Switch>
     </Fragment>
